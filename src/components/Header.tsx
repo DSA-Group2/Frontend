@@ -1,0 +1,43 @@
+import { ArrowLeftCircle } from "lucide-react";
+import React from "react";
+import { Input } from "./ui/input";
+import { Button } from "./ui/button";
+import {
+    Tooltip,
+    TooltipContent,
+    TooltipProvider,
+    TooltipTrigger,
+} from "@/components/ui/tooltip";
+
+const Header = () => {
+    return (
+        <div className="flex flex-row justify-between p-3">
+            <TooltipProvider>
+                <Tooltip>
+                    <TooltipTrigger>
+                        <ArrowLeftCircle className="hover:cursor-pointer" />
+                    </TooltipTrigger>
+                    <TooltipContent>
+                        <p>Back to Workspace</p>
+                    </TooltipContent>
+                </Tooltip>
+            </TooltipProvider>
+
+            <Input
+                className="w-[400px] rounded-lg"
+                placeholder="name your program..."
+            />
+
+            <div className="flex flex-row gap-2">
+                <Button size="lg" variant="secondary" className="rounded-lg">
+                    Save
+                </Button>
+                <Button size="lg" variant="default" className="rounded-lg">
+                    Submit
+                </Button>
+            </div>
+        </div>
+    );
+};
+
+export default Header;
