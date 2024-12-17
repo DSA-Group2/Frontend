@@ -1,4 +1,4 @@
-import { ArrowLeftCircle } from "lucide-react";
+import { ArrowLeftCircle, BookMarked, Play } from "lucide-react";
 import React from "react";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
@@ -30,10 +30,11 @@ const Header = () => {
 
             <div className="flex flex-row gap-2">
                 <Button size="lg" variant="secondary" className="rounded-lg">
-                    Save
+                    Save to Workspace
+                    <BookMarked size={20} />
                 </Button>
                 <Button size="lg" variant="default" className="rounded-lg">
-                    Submit
+                    Run <Play size={20} />
                 </Button>
             </div>
         </div>

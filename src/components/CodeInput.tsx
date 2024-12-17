@@ -1,6 +1,6 @@
 import React, { useCallback } from "react";
 import CodeMirror from "@uiw/react-codemirror";
-import { javascript } from "@codemirror/lang-javascript";
+import { chooseLanguage } from "@/lib/utils";
 
 const CodeInput = ({
     language,
@@ -17,9 +17,9 @@ const CodeInput = ({
 
     return (
         <CodeMirror
-            className="flex-grow"
+            className="flex-1"
             value={value}
-            extensions={[javascript({ jsx: true })]}
+            extensions={chooseLanguage(language)}
             theme={"dark"}
             onChange={onChange}
             height="100%"
