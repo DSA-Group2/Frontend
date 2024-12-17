@@ -14,7 +14,7 @@ createRoot(document.getElementById("root")!).render(
         <BrowserRouter>
             <Routes>
                 <Route path="/" element={<Homepage />} />
-                <Route path="code" element={<CodePage />}>
+                <Route path="code"/*  element={<CodePage />} */>
                     <Route path="new" element={<CodeNew />} />
                     <Route path="exists/:programId" element={<CodeExists />} />
                 </Route>

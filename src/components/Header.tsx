@@ -8,6 +8,7 @@ import {
     TooltipProvider,
     TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { NavLink } from "react-router";
 
 const Header = () => {
     return (
@@ -15,10 +16,12 @@ const Header = () => {
             <TooltipProvider>
                 <Tooltip>
                     <TooltipTrigger>
-                        <ArrowLeftCircle className="hover:cursor-pointer" />
+                        <NavLink to={"/"}>
+                            <ArrowLeftCircle className="hover:cursor-pointer" />
+                        </NavLink>
                     </TooltipTrigger>
                     <TooltipContent>
-                        <p>Back to Workspace</p>
+                        <p>Back</p>
                     </TooltipContent>
                 </Tooltip>
             </TooltipProvider>
