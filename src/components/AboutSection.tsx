@@ -2,7 +2,7 @@ import React from "react";
 
 const AboutSection = () => {
     return (
-        <section className="flex flex-col items-start gap-8 max-w-[800px] mx-auto">
+        <section className="flex flex-col items-start gap-8 max-w-[800px] mx-auto px-2">
             <h2 className="text-3xl font-extrabold">About Our Editor</h2>
 
             <p className="text-lg font-normal flex flex-col gap-6">

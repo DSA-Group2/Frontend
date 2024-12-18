@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/tooltip";
 import { NavLink } from "react-router";
 import { useNavigate } from "react-router";
-import { useAuthContext } from "@/contexts/AuthContextProvider";
+import { useAuthContext } from "@/contextsAndProviders/AuthContextProvider";
 import {
     Dialog,
     DialogContent,
@@ -20,10 +20,88 @@ import {
     DialogTrigger,
     DialogFooter,
 } from "@/components/ui/dialog";
+import { run, save } from "@/lib/services/code";
+import { useMutation } from "@tanstack/react-query";
+import { useToast } from "@/hooks/use-toast";
+import { LANGUAGES } from "@/lib/constants";
 
-const Header = () => {
-    const { user, setUser } = useAuthContext();
+const Header = ({
+    source_code,
+    language,
+    result,
+    stdin,
+    setOutput,
+}: {
+    source_code: string;
+    language: string;
+    result: string;
+    stdin: string;
+    setOutput: React.Dispatch<React.SetStateAction<string>>;
+}) => {
+    const { user } = useAuthContext();
+    const { toast } = useToast();
     const navigate = useNavigate();
+
+    const { mutate, isPending } = useMutation({
+        mutationKey: ["save-code"],
+        mutationFn: async () => {
+            const res = await save(
+                user?.userId as string,
+                source_code,
+                LANGUAGES.find((lang) => lang.value === language)
+                    ?.code as number,
+                result
+            );
+
+            toast({
+                description: "Code saved to workspace!",
+            });
+        },
+        onSuccess: () => {
+            // refetch the programs in workspace
+        },
+        onError: () => {
+            toast({
+                variant: "destructive",
+                title: "Some error occured. Try again soon",
+            });
+        },
+    });
+
+    const { mutate: mutateRun, isPending: isPendingRun } = useMutation({
+        mutationKey: ["run-code"],
+        mutationFn: async () => {
+            const res = await run(
+                source_code,
+                LANGUAGES.find((lang) => lang.value === language)
+                    ?.code as number,
+                stdin
+            );
+
+            setOutput(res.data);
+            toast({
+                description: "Code has been run! Check the output window",
+            });
+        },
+        onError: () => {
+            toast({
+                variant: "destructive",
+                title: "Some error occured. Try again soon",
+            });
+        },
+    });
+
+    const onCodeSave = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+
+        mutate();
+    };
+
+    const onCodeRun = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+
+        mutateRun();
+    };
 
     return (
         <div className="flex flex-row justify-between p-3">
@@ -52,14 +130,17 @@ const Header = () => {
 
             <div className="flex flex-row gap-2">
                 {user ? (
-                    <Button
-                        size="lg"
-                        variant="secondary"
-                        className="rounded-lg"
-                    >
-                        Save to Workspace
-                        <BookMarked size={20} />
-                    </Button>
+                    <form onSubmit={onCodeSave}>
+                        <Button
+                            size="lg"
+                            variant="secondary"
+                            className="rounded-lg"
+                            disabled={isPending}
+                        >
+                            Save to Workspace
+                            <BookMarked size={20} />
+                        </Button>
+                    </form>
                 ) : (
                     <Dialog>
                         <DialogTrigger>
@@ -95,9 +176,16 @@ const Header = () => {
                         </DialogContent>
                     </Dialog>
                 )}
-                <Button size="lg" variant="default" className="rounded-lg">
-                    Run <Play size={20} />
-                </Button>
+                <form onSubmit={onCodeRun}>
+                    <Button
+                        size="lg"
+                        variant="default"
+                        className="rounded-lg"
+                        disabled={isPendingRun}
+                    >
+                        Run <Play size={20} />
+                    </Button>
+                </form>
             </div>
         </div>
     );

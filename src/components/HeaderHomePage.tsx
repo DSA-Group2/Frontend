@@ -1,7 +1,7 @@
 import { BookMarked, Code, Key, ScanFace } from "lucide-react";
 import { Button } from "./ui/button";
 import { NavLink } from "react-router";
-import { useAuthContext } from "@/contexts/AuthContextProvider";
+import { useAuthContext } from "@/contextsAndProviders/AuthContextProvider";
 
 const HeaderHomePage = () => {
     const { user, setUser } = useAuthContext();

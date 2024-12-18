@@ -8,31 +8,42 @@ import CodeExists from "./pages/CodeExists.tsx";
 import LoginPage from "./pages/LoginPage.tsx";
 import SignupPage from "./pages/SignupPage.tsx";
 import WorkspacePage from "./pages/WorkspacePage.tsx";
-import { AuthContextProvider } from "./contexts/AuthContextProvider.tsx";
+import { AuthContextProvider } from "./contextsAndProviders/AuthContextProvider.tsx";
 import CodePage from "./pages/CodePage.tsx";
 import AuthChecker from "./components/AuthChecker.tsx";
+import QueryProvider from "./contextsAndProviders/QueryProvider.tsx";
+import { Toaster } from "@/components/ui/toaster";
 
 createRoot(document.getElementById("root")!).render(
     <StrictMode>
-        <AuthContextProvider>
-            <BrowserRouter>
-                <Routes>
-                    <Route path="/" element={<Homepage />} />
-                    <Route path="new" element={<CodeNew />} />
+        <QueryProvider>
+            <AuthContextProvider>
+                <BrowserRouter>
+                    <Routes>
+                        <Route path="/" element={<Homepage />} />
+                        <Route path="new" element={<CodeNew />} />
 
-                    <Route path="/valid" element={<AuthChecker />}>
-                        <Route path="code">
-                            <Route index element={<CodePage />} />
-                            <Route path=":programId" element={<CodeExists />} />
+                        <Route path="/valid" element={<AuthChecker />}>
+                            <Route path="code">
+                                <Route index element={<CodePage />} />
+                                <Route
+                                    path=":programId"
+                                    element={<CodeExists />}
+                                />
+                            </Route>
+
+                            <Route
+                                path="workspace"
+                                element={<WorkspacePage />}
+                            />
                         </Route>
 
-                        <Route path="workspace" element={<WorkspacePage />} />
-                    </Route>
-
-                    <Route path="login" element={<LoginPage />} />
-                    <Route path="signup" element={<SignupPage />} />
-                </Routes>
-            </BrowserRouter>
-        </AuthContextProvider>
+                        <Route path="login" element={<LoginPage />} />
+                        <Route path="signup" element={<SignupPage />} />
+                    </Routes>
+                </BrowserRouter>
+            </AuthContextProvider>
+        </QueryProvider>
+        <Toaster />
     </StrictMode>
 );

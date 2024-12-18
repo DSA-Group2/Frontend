@@ -6,7 +6,7 @@ import { ArrowRight, UserPen } from "lucide-react";
 const SubHeroSection = () => {
     return (
         <section
-            className="flex flex-col md:flex-row gap-8 max-w-[1000px] mx-auto text-center"
+            className="flex flex-col md:flex-row gap-8 max-w-[1000px] mx-auto text-center px-2"
             id="more"
         >
             <div className="flex-1 border-[1px] border-gray-400 rounded-lg p-10 flex flex-col gap-4 justify-center items-center">

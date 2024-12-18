@@ -4,7 +4,6 @@ import LanguageDropdown from "@/components/LanguageDropdown";
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Eraser } from "lucide-react";
-import { redirect } from "react-router";
 
 function CodeNew() {
     const [language, setLanguage] = useState<
@@ -19,7 +18,13 @@ function CodeNew() {
 
     return (
         <section className="dark absolute inset-0 h-full flex flex-col p-2 bg-[#030712] text-white">
-            <Header />
+            <Header
+                source_code={program}
+                language={language}
+                result={output}
+                stdin={input}
+                setOutput={setOutput}
+            />
 
             <div className="flex flex-col md:flex-row flex-1 gap-2">
                 <div className="flex flex-col flex-1 gap-2 h-full border-[0.5px] p-2 rounded-lg border-white border-opacity-50">

@@ -3,8 +3,16 @@ import { Label } from "./ui/label";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
+import { useAuthContext } from "@/contextsAndProviders/AuthContextProvider";
+import { login, signup } from "@/lib/services/auth";
+import { useToast } from "@/hooks/use-toast";
+import { useMutation } from "@tanstack/react-query";
+import { redirect } from "react-router";
 
 const SignupForm = () => {
+    const { setUser } = useAuthContext();
+    const { toast } = useToast();
+
     const [username, setUsername] = useState<string>("");
     const [password, setPassword] = useState<string>("");
     const [confirmPass, setConfirmPass] = useState<string>("");
@@ -12,8 +20,42 @@ const SignupForm = () => {
     const [isChecked, setIsChecked] = useState(false);
     const [isConfChecked, setIsConfChecked] = useState(false);
 
+    const { mutate, isPending } = useMutation({
+        mutationKey: ["signup"],
+        mutationFn: async () => {
+            const res = await signup(username, password);
+
+            if (res.message) {
+                toast({
+                    variant: "destructive",
+                    title: res.message as string,
+                });
+            } else {
+                const res2 = await login(username, password);
+
+                setUser(res2.data);
+                redirect("/workspace");
+                toast({
+                    description: "Signup successful!",
+                });
+            }
+        },
+        onError: () => {
+            toast({
+                variant: "destructive",
+                title: "Some error occured. Try again soon",
+            });
+        },
+    });
+
+    const onFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        
+        mutate();
+    };
+
     return (
-        <form className="flex flex-col gap-4 py-6">
+        <form className="flex flex-col gap-4 py-6" onSubmit={onFormSubmit}>
             <Label htmlFor="username">Username</Label>
             <Input
                 name="username"
@@ -66,8 +108,8 @@ const SignupForm = () => {
                 />
             </div>
 
-            <Button className="w-full" type="submit">
-                Log In
+            <Button className="w-full" type="submit" disabled={isPending}>
+                {isPending ? "Logging in..." : "Log In"}
             </Button>
         </form>
     );

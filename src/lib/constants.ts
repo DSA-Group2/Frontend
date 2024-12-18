@@ -1,19 +1,19 @@
 export const LANGUAGES = [
     {
-        code: 101,
+        code: 63,
         value: "javascript",
         name: "Javascript",
     },
     {
-        code: 102,
+        code: 71,
         value: "python",
         name: "Python",
     },
     {
-        code: 103,
+        code: 46,
         value: "bash",
         name: "Bash(Shell)",
     },
 ];
 
-export const serverApi = "http://localhost:8080";
+export const SERVER_API_ENDPOINT = "http://localhost:8080";

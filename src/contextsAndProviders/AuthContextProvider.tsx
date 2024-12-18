@@ -14,6 +14,7 @@ export const AuthContextProvider = ({
 }) => {
     const [user, setUser] = useState<LoginResponse | null>({
         token: "12345",
+        userId: "fej923",
         username: "newuser",
     });
 
@@ -27,9 +28,10 @@ export const AuthContextProvider = ({
 export const useAuthContext = () => {
     const auth = useContext(AuthContext);
 
-    console.log(auth);
+    if (!auth)
+        throw new Error("Auth context must be used within the auth provider!");
 
-    if (!auth || !auth.user) return { user: null, setUser: null };
+    if (!auth.user) return { user: null, setUser: auth.setUser };
 
     return auth;
 };

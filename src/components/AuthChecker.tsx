@@ -1,5 +1,5 @@
 import React from "react";
-import { useAuthContext } from "@/contexts/AuthContextProvider";
+import { useAuthContext } from "@/contextsAndProviders/AuthContextProvider";
 import { Outlet, redirect, Navigate } from "react-router";
 
 const AuthChecker = () => {
