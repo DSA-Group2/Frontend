@@ -1,8 +1,11 @@
-import { Code, Key, ScanFace } from "lucide-react";
+import { BookMarked, Code, Key, ScanFace } from "lucide-react";
 import { Button } from "./ui/button";
 import { NavLink } from "react-router";
+import { useAuthContext } from "@/contexts/AuthContextProvider";
 
 const HeaderHomePage = () => {
+    const { user, setUser } = useAuthContext();
+
     return (
         <div className="flex flex-row justify-between items-center border-b-[1px] border-primary py-5 px-8">
             <NavLink to="/">
@@ -19,17 +22,27 @@ const HeaderHomePage = () => {
             </NavLink>
 
             <div className="flex flex-row gap-4 items-center">
-                <NavLink to="/login">
-                    <Button variant="secondary">
-                        Log In <Key />
-                    </Button>
-                </NavLink>
+                {user ? (
+                    <NavLink to="/valid/workspace">
+                        <Button variant="default">
+                            Visit your workspace <BookMarked />
+                        </Button>
+                    </NavLink>
+                ) : (
+                    <>
+                        <NavLink to="/login">
+                            <Button variant="secondary">
+                                Log In <Key />
+                            </Button>
+                        </NavLink>
 
-                <NavLink to="/signup">
-                    <Button variant="default">
-                        Sign Up <ScanFace />
-                    </Button>
-                </NavLink>
+                        <NavLink to="/signup">
+                            <Button variant="default">
+                                Sign Up <ScanFace />
+                            </Button>
+                        </NavLink>
+                    </>
+                )}
             </div>
         </div>
     );

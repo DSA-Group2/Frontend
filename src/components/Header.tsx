@@ -10,8 +10,19 @@ import {
 } from "@/components/ui/tooltip";
 import { NavLink } from "react-router";
 import { useNavigate } from "react-router";
+import { useAuthContext } from "@/contexts/AuthContextProvider";
+import {
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
+    DialogFooter,
+} from "@/components/ui/dialog";
 
 const Header = () => {
+    const { user, setUser } = useAuthContext();
     const navigate = useNavigate();
 
     return (
@@ -40,10 +51,50 @@ const Header = () => {
             />
 
             <div className="flex flex-row gap-2">
-                <Button size="lg" variant="secondary" className="rounded-lg">
-                    Save to Workspace
-                    <BookMarked size={20} />
-                </Button>
+                {user ? (
+                    <Button
+                        size="lg"
+                        variant="secondary"
+                        className="rounded-lg"
+                    >
+                        Save to Workspace
+                        <BookMarked size={20} />
+                    </Button>
+                ) : (
+                    <Dialog>
+                        <DialogTrigger>
+                            <Button
+                                size="lg"
+                                variant="secondary"
+                                className="rounded-lg"
+                            >
+                                Save to Workspace
+                                <BookMarked size={20} />
+                            </Button>
+                        </DialogTrigger>
+                        <DialogContent className="dark">
+                            <DialogHeader>
+                                <DialogTitle>
+                                    Log in to save your program to your
+                                    workspace!
+                                </DialogTitle>
+                                <DialogDescription>
+                                    Save your program to our sophisticated
+                                    workspace by logging in, or signing up by
+                                    creating an account!
+                                </DialogDescription>
+                            </DialogHeader>
+                            <DialogFooter>
+                                <NavLink to="/signup">
+                                    <Button variant="secondary">Sign Up</Button>
+                                </NavLink>
+                                <NavLink to="/login">
+                                    <Button variant="default">Log In</Button>
+                                </NavLink>
+                            </DialogFooter>
+                        </DialogContent>
+                    </Dialog>
+                )}
                 <Button size="lg" variant="default" className="rounded-lg">
                     Run <Play size={20} />
                 </Button>

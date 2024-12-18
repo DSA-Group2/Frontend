@@ -15,3 +15,5 @@ export const LANGUAGES = [
         name: "Bash(Shell)",
     },
 ];
+
+export const serverApi = "http://localhost:8080";

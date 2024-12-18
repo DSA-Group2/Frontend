@@ -22,3 +22,9 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# environment files
+.env
+
+#TODO files
+TODO.md

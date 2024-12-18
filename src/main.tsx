@@ -7,25 +7,32 @@ import CodeNew from "./pages/CodeNew.tsx";
 import CodeExists from "./pages/CodeExists.tsx";
 import LoginPage from "./pages/LoginPage.tsx";
 import SignupPage from "./pages/SignupPage.tsx";
-import CodePage from "./pages/CodePage.tsx";
 import WorkspacePage from "./pages/WorkspacePage.tsx";
+import { AuthContextProvider } from "./contexts/AuthContextProvider.tsx";
+import CodePage from "./pages/CodePage.tsx";
+import AuthChecker from "./components/AuthChecker.tsx";
 
 createRoot(document.getElementById("root")!).render(
     <StrictMode>
-        <BrowserRouter>
-            <Routes>
-                <Route path="/" element={<Homepage />} />
-
-                <Route path="code" /*  element={<CodePage />} */>
+        <AuthContextProvider>
+            <BrowserRouter>
+                <Routes>
+                    <Route path="/" element={<Homepage />} />
                     <Route path="new" element={<CodeNew />} />
-                    <Route path="exists/:programId" element={<CodeExists />} />
-                </Route>
 
-                <Route path="login" element={<LoginPage />} />
-                <Route path="signup" element={<SignupPage />} />
+                    <Route path="/valid" element={<AuthChecker />}>
+                        <Route path="code">
+                            <Route index element={<CodePage />} />
+                            <Route path=":programId" element={<CodeExists />} />
+                        </Route>
 
-                <Route path="workspace" element={<WorkspacePage />} />
-            </Routes>
-        </BrowserRouter>
+                        <Route path="workspace" element={<WorkspacePage />} />
+                    </Route>
+
+                    <Route path="login" element={<LoginPage />} />
+                    <Route path="signup" element={<SignupPage />} />
+                </Routes>
+            </BrowserRouter>
+        </AuthContextProvider>
     </StrictMode>
 );

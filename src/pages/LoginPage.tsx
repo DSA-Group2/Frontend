@@ -9,12 +9,14 @@ import {
     CardTitle,
 } from "@/components/ui/card";
 import { NavLink } from "react-router";
+import BackHome from "@/components/BackHome";
 
 //bg-gradient-to-tr from-gray-800 to-gray-500
 
 const LoginPage = () => {
     return (
         <section className="dark h-full grid bg-black place-content-center p-4">
+            <BackHome />
             <Card className="flex flex-col md:flex-row gap-4 items-center bg-gray-950">
                 <div className="flex-1 grid place-content-center">
                     <img

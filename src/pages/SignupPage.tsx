@@ -9,10 +9,12 @@ import {
 } from "@/components/ui/card";
 import { NavLink } from "react-router";
 import SignupForm from "@/components/SignupForm";
+import BackHome from "@/components/BackHome";
 
 const SignupPage = () => {
     return (
         <section className="dark h-full grid bg-black place-content-center p-4">
+            <BackHome />
             <Card className="flex flex-col md:flex-row gap-4 items-center bg-gray-950">
                 <div className="flex-1 grid place-content-center">
                     <img

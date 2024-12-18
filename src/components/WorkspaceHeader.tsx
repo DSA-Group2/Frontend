@@ -3,7 +3,7 @@ import { NavLink } from "react-router";
 
 const WorkspaceHeader = () => {
     return (
-        <div className="flex flex-row justify-center items-center border-b-[1px] border-primary py-5 px-8 -mx-8">
+        <div className="flex flex-row justify-start items-center border-b-[1px] border-primary py-5 px-8 -mx-8">
             <NavLink to="/">
                 <h3 className="text-lg font-bold flex flex-row gap-4 items-center hover:cursor-pointer">
                     <img

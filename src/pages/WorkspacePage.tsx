@@ -13,7 +13,7 @@ const WorkspacePage = () => {
         >
             <WorkspaceHeader />
 
-            <h1 className="text-3xl font-extrabold">
+            <h1 className="text-4xl font-extrabold">
                 Welcome to your workspace 'username'!
             </h1>
 
