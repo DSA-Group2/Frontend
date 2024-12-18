@@ -12,28 +12,39 @@ const AboutSection = () => {
                 essential features to elevate your workflow:
                 <ul className="list-disc flex flex-col gap-4 font-extralight">
                     <li>
-                        Syntax Highlighting: Easily distinguish code elements
-                        for better readability.
+                        <span className="font-bold">Syntax Highlighting:</span>{" "}
+                        Easily distinguish code elements for better readability.
                     </li>
                     <li>
-                        Auto-Completion: Boost productivity with smart
-                        suggestions as you type.
+                        <span className="font-bold">Auto-Completion:</span>{" "}
+                        Boost productivity with smart suggestions as you type.
                     </li>
                     <li>
-                        Error Detection: Identify compilation and runtime issues
-                        instantly for faster debugging.
+                        <span className="font-bold">Error Detection:</span>{" "}
+                        Identify compilation and runtime issues instantly for
+                        faster debugging.
                     </li>
                     <li>
-                        Customizable Workspaces: Save, access, and manage your
-                        programs effortlessly in organized workspaces.
+                        <span className="font-bold">
+                            Customizable Workspaces:
+                        </span>{" "}
+                        Save, access, and manage your programs effortlessly in
+                        organized workspaces.
                     </li>
                     <li>
-                        Multi-Language Support: Seamlessly write and execute
-                        Python, JavaScript, and Bash code.
+                        <span className="font-bold">
+                            Multi-Language Support:
+                        </span>{" "}
+                        Seamlessly write and execute{" "}
+                        <span className="font-bold">
+                            Python, JavaScript, and Bash
+                        </span>{" "}
+                        code.
                     </li>
                     <li>
-                        Responsive Design: Enjoy a smooth coding experience on
-                        any device or screen size.
+                        <span className="font-bold">Responsive Design:</span>{" "}
+                        Enjoy a smooth coding experience on any device or screen
+                        size.
                     </li>
                 </ul>
                 Simplify coding, testing, and managing programs in one unified

@@ -9,16 +9,24 @@ import {
     TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { NavLink } from "react-router";
+import { useNavigate } from "react-router";
 
 const Header = () => {
+    const navigate = useNavigate();
+
     return (
         <div className="flex flex-row justify-between p-3">
             <TooltipProvider>
                 <Tooltip>
                     <TooltipTrigger>
-                        <NavLink to={"/"}>
+                        <Button
+                            type="button"
+                            variant="ghost"
+                            size="icon"
+                            onClick={() => navigate(-1)}
+                        >
                             <ArrowLeftCircle className="hover:cursor-pointer" />
-                        </NavLink>
+                        </Button>
                     </TooltipTrigger>
                     <TooltipContent>
                         <p>Back</p>

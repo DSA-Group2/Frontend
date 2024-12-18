@@ -24,10 +24,10 @@ const HeroSection = () => {
                 <a href="#more">
                     <Button
                         size="lg"
-                        className="flex flex-row gap-2 w-fit"
+                        className="flex flex-row gap-2 w-fit group"
                         variant="default"
                     >
-                        Know More <ArrowDown size={24} />{" "}
+                        Know More <ArrowDown size={24} className="group-hover:translate-y-[2px] transition-all"/>{" "}
                     </Button>
                 </a>
             </div>

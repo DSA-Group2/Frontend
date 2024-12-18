@@ -17,7 +17,7 @@ function CodeNew() {
     );
 
     return (
-        <section className="dark absolute inset-0 h-full flex flex-col p-2 bg-black text-white">
+        <section className="dark absolute inset-0 h-full flex flex-col p-2 bg-[#030712] text-white">
             <Header />
 
             <div className="flex flex-col md:flex-row flex-1 gap-2">

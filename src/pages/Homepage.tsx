@@ -12,15 +12,15 @@ const Homepage = () => {
 
             <HeroSection />
 
-            <div className="border-b-[1px] border-gray-400 my-[100px]" />
+            <div className="border-b-[1px] border-primary my-[100px]" />
 
             <SubHeroSection />
 
-            <div className="border-b-[1px] border-gray-400 my-[100px]" />
+            <div className="border-b-[1px] border-primary my-[100px]" />
 
             <AboutSection />
 
-            <div className="border-b-[1px] border-gray-400 my-[100px]" />
+            <div className="border-b-[1px] border-primary my-[100px]" />
 
             <Footer />
         </section>

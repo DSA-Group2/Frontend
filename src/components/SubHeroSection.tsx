@@ -5,7 +5,10 @@ import { ArrowRight, UserPen } from "lucide-react";
 
 const SubHeroSection = () => {
     return (
-        <section className="flex flex-col md:flex-row gap-8 max-w-[1000px] mx-auto text-center" id="more">
+        <section
+            className="flex flex-col md:flex-row gap-8 max-w-[1000px] mx-auto text-center"
+            id="more"
+        >
             <div className="flex-1 border-[1px] border-gray-400 rounded-lg p-10 flex flex-col gap-4 justify-center items-center">
                 <h4 className="font-extrabold text-xl">Build and Test</h4>
                 <p className="font-extralight text-lg">
@@ -17,11 +20,14 @@ const SubHeroSection = () => {
                 <NavLink to="/code/new">
                     <Button
                         size="lg"
-                        className="flex flex-row gap-2 w-fit mt-4"
+                        className="flex flex-row gap-2 w-fit mt-4 group"
                         variant="default"
                     >
                         Try out our editor
-                        <ArrowRight size={24} />
+                        <ArrowRight
+                            size={24}
+                            className="group-hover:translate-x-[2px] transition-all"
+                        />
                     </Button>
                 </NavLink>
             </div>
