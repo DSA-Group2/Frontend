@@ -7,6 +7,7 @@ import { Eraser } from "lucide-react";
 import { useParams } from "react-router";
 import { useQuery } from "@tanstack/react-query";
 import { getSpeceficProgram } from "@/lib/services/code";
+import ChatWindow from "@/components/ChatWindow";
 
 const CodeExists = () => {
     const params = useParams();
@@ -123,6 +124,8 @@ const CodeExists = () => {
                         />
                     </div>
                 </div>
+
+                <ChatWindow />
             </section>
         );
 };

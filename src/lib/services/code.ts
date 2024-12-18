@@ -66,3 +66,15 @@ export const getSpeceficProgram = async (programId: string) => {
         throw new Error();
     }
 };
+
+export const askAIAQuestion = async (code: string, query: string) => {
+    try {
+        /* const res = await api.post(`/inline`, { query, code }); */
+
+        return { success: true, code: 'RANDOM RESPONSE' };
+    } catch (error) {
+        handleAxiosError(error);
+
+        throw new Error();
+    }
+};

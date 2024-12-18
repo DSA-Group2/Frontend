@@ -4,6 +4,7 @@ import LanguageDropdown from "@/components/LanguageDropdown";
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Eraser } from "lucide-react";
+import ChatWindow from "@/components/ChatWindow";
 
 function CodeNew() {
     const [language, setLanguage] = useState<
@@ -90,6 +91,8 @@ function CodeNew() {
                     />
                 </div>
             </div>
+
+            <ChatWindow />
         </section>
     );
 }
