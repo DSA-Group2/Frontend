@@ -28,7 +28,7 @@ export const save = async (
     language_id: number
 ) => {
     try {
-        const res = await api.post("/code/save", {
+        await api.post("/code/save", {
             userId,
             source_code,
             language_id,
@@ -48,7 +48,7 @@ export const update = async (
     language_id: number
 ) => {
     try {
-        const res = await api.put(`/code/save/${progId}`, {
+        await api.put(`/code/save/${progId}`, {
             source_code,
             language_id,
         });
@@ -75,7 +75,7 @@ export const getAllPrograms = async (userId: string) => {
 
 export const deleteProgram = async (codeId: string) => {
     try {
-        const res = await api.delete(`/code/delete/${codeId}`);
+        await api.delete(`/code/delete/${codeId}`);
 
         return { success: true };
     } catch (error) {

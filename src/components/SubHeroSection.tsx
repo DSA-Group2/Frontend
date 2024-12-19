@@ -1,7 +1,6 @@
-import React from "react";
 import { Button } from "./ui/button";
 import { NavLink } from "react-router";
-import { ArrowRight, UserPen } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 const SubHeroSection = () => {
     return (

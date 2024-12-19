@@ -1,5 +1,3 @@
-import React from "react";
-
 const AboutSection = () => {
     return (
         <section className="flex flex-col items-start gap-8 max-w-[800px] mx-auto px-2">

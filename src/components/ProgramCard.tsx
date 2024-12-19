@@ -1,4 +1,3 @@
-import React from "react";
 import {
     Card,
     CardContent,
@@ -8,7 +7,7 @@ import {
     CardTitle,
 } from "@/components/ui/card";
 import { Button } from "./ui/button";
-import { ArrowRight, EllipsisVertical, Pencil, Trash2 } from "lucide-react";
+import { ArrowRight, EllipsisVertical, Trash2 } from "lucide-react";
 import {
     Popover,
     PopoverContent,
@@ -26,17 +25,6 @@ import {
     AlertDialogTitle,
     AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-import {
-    Dialog,
-    DialogContent,
-    DialogDescription,
-    DialogHeader,
-    DialogTitle,
-    DialogTrigger,
-    DialogFooter,
-    DialogClose,
-} from "@/components/ui/dialog";
-import { Input } from "./ui/input";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useToast } from "@/hooks/use-toast";
 import { deleteProgram } from "@/lib/services/code";

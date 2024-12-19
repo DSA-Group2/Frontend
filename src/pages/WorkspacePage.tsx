@@ -1,4 +1,3 @@
-import React from "react";
 import ProgramCard from "@/components/ProgramCard";
 import { Button } from "@/components/ui/button";
 import { NavLink } from "react-router";

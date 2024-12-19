@@ -3,7 +3,7 @@ import { handleAxiosError } from "../utils";
 
 export const signup = async (username: string, password: string) => {
     try {
-        const response = await api.post("/auth/signup", { username, password });
+        await api.post("/auth/signup", { username, password });
 
         return {
             success: true,

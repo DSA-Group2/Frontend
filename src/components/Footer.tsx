@@ -1,12 +1,7 @@
-import React from "react";
-
 const Footer = () => {
     return (
-        <section
-            id="footer"
-            className="grid place-content-center text-xl font-bold"
-        >
-            Footer
+        <section id="footer" className="text-sm font-bold w-full text-center">
+            copyright 2024
         </section>
     );
 };

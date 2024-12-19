@@ -1,7 +1,7 @@
 import CodeInput from "@/components/CodeInput";
 import Header from "@/components/Header";
 import LanguageDropdown from "@/components/LanguageDropdown";
-import React, { useState } from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Eraser } from "lucide-react";
 import ChatWindow from "@/components/ChatWindow";

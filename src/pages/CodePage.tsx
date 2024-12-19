@@ -1,5 +1,4 @@
 import { ArrowRight } from "lucide-react";
-import React from "react";
 import { NavLink } from "react-router";
 
 const CodePage = () => {

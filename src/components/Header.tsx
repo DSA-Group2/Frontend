@@ -32,12 +32,14 @@ const Header = ({
     stdin,
     setOutput,
     progId,
+    progName,
 }: {
     source_code: string;
     language: string;
     stdin: string;
     setOutput: React.Dispatch<React.SetStateAction<string>>;
     progId?: string;
+    progName?: string;
 }) => {
     const { user } = useAuthContext();
     const { toast } = useToast();
@@ -48,7 +50,7 @@ const Header = ({
         mutationKey: ["save-code"],
         mutationFn: async () => {
             if (progId) {
-                const res = await update(
+                await update(
                     progId,
                     source_code,
                     LANGUAGES.find((lang) => lang.value === language)
@@ -59,7 +61,7 @@ const Header = ({
                     description: "Code updated successfully!",
                 });
             } else {
-                const res = await save(
+                await save(
                     user?.userId as string,
                     source_code,
                     LANGUAGES.find((lang) => lang.value === language)
@@ -70,7 +72,6 @@ const Header = ({
                     description: "Code saved to workspace!",
                 });
             }
-
         },
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ["workspace"] });
@@ -120,29 +121,42 @@ const Header = ({
 
     return (
         <div className="flex flex-row justify-between p-3">
-            <TooltipProvider>
-                <Tooltip>
-                    <TooltipTrigger>
-                        <Button
-                            type="button"
-                            variant="ghost"
-                            size="icon"
-                            onClick={() => navigate(-1)}
-                        >
-                            <ArrowLeftCircle className="hover:cursor-pointer" />
-                        </Button>
-                    </TooltipTrigger>
-                    <TooltipContent>
-                        <p>Back</p>
-                    </TooltipContent>
-                </Tooltip>
-            </TooltipProvider>
-
-            <Input
-                className="w-[400px] rounded-lg"
-                placeholder="name your program..."
-                defaultValue="Untitled"
-            />
+            <div className="flex flex-row gap-2 items-center">
+                <TooltipProvider>
+                    <Tooltip>
+                        <TooltipTrigger>
+                            <Button
+                                type="button"
+                                variant="ghost"
+                                size="icon"
+                                onClick={() => navigate(-1)}
+                            >
+                                <ArrowLeftCircle className="hover:cursor-pointer" />
+                            </Button>
+                        </TooltipTrigger>
+                        <TooltipContent>
+                            <p>Back</p>
+                        </TooltipContent>
+                    </Tooltip>
+                </TooltipProvider>
+                <NavLink to="/">
+                    <h3 className="text-lg font-bold flex flex-row gap-4 items-center hover:cursor-pointer mr-3">
+                        <img
+                            src="/logo.png"
+                            alt="cross=code-logo"
+                            height={44}
+                            width={44}
+                            className="rounded-full"
+                        />{" "}
+                        Cross Code
+                    </h3>
+                </NavLink>
+                <Input
+                    className="w-[200px] rounded-lg border-primary"
+                    placeholder="name your program..."
+                    defaultValue={progName ? progName : "Untitled"}
+                />
+            </div>
 
             <div className="flex flex-row gap-2">
                 {user ? (

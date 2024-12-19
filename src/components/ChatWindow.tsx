@@ -14,12 +14,9 @@ import {
     CardContent,
     CardDescription,
     CardFooter,
-    CardHeader,
-    CardTitle,
 } from "@/components/ui/card";
-import { Input } from "./ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import { askAIAQuestion } from "@/lib/services/code";
 
 const ChatWindow = () => {
@@ -77,7 +74,7 @@ const ChatWindow = () => {
                                 ))}
                             </CardContent>
                             <CardFooter className="flex flex-col gap-2 border-t-[1px] border-primary pt-5">
-                                <div className="flex flex-row gap-2">
+                                <div className="flex flex-row justify-between w-full gap-2">
                                     <Textarea
                                         name="code"
                                         id="code"

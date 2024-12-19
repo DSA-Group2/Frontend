@@ -1,10 +1,10 @@
-import { BookMarked, Code, Key, ScanFace } from "lucide-react";
+import { BookMarked, Key, ScanFace } from "lucide-react";
 import { Button } from "./ui/button";
 import { NavLink } from "react-router";
 import { useAuthContext } from "@/contextsAndProviders/AuthContextProvider";
 
 const HeaderHomePage = () => {
-    const { user, setUser } = useAuthContext();
+    const { user } = useAuthContext();
 
     return (
         <div className="flex flex-row justify-between items-center border-b-[1px] border-primary py-5 px-8">
