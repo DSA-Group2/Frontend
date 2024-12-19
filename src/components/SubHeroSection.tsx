@@ -16,7 +16,7 @@ const SubHeroSection = () => {
                     unified environment, streamlining your development process
                     with speed, reliability, and zero setup.
                 </p>
-                <NavLink to="/code/new">
+                <NavLink to="/new">
                     <Button
                         size="lg"
                         className="flex flex-row gap-2 w-fit mt-4 group"

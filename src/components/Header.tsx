@@ -98,7 +98,13 @@ const Header = ({
                 stdin
             );
 
-            setOutput(res.data.stdout);
+            console.log(res.data);
+
+            try {
+                setOutput(res.data.stdout);
+            } catch (error) {
+                setOutput("There is an error in your program!");
+            }
             toast({
                 description: "Code has been run! Check the output window",
             });
