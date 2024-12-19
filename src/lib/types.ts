@@ -12,4 +12,5 @@ export type ProgramType = {
     userId: string;
     __v: number;
     _id: string;
+    name: string;
 };

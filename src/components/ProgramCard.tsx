@@ -55,7 +55,7 @@ const ProgramCard = ({ program }: { program: ProgramType }) => {
         <Card className="border-none shadow-sm shadow-primary hover:shadow-md hover:shadow-primary hover:scale-[1.01] hover:cursor-pointer transition-all">
             <CardHeader>
                 <CardTitle className="flex flex-row justify-between items-center">
-                    Untitled
+                    {program.name}
                     <Popover>
                         <PopoverTrigger className="p-[2px] rounded-full hover:bg-gray-800 transition-all">
                             <EllipsisVertical />

@@ -25,13 +25,15 @@ export const run = async (
 export const save = async (
     userId: string,
     source_code: string,
-    language_id: number
+    language_id: number,
+    name: string
 ) => {
     try {
         await api.post("/code/save", {
             userId,
             source_code,
             language_id,
+            name,
         });
 
         return { success: true };
@@ -45,12 +47,14 @@ export const save = async (
 export const update = async (
     progId: string,
     source_code: string,
-    language_id: number
+    language_id: number,
+    name: string
 ) => {
     try {
         await api.put(`/code/save/${progId}`, {
             source_code,
             language_id,
+            name,
         });
 
         return { success: true };

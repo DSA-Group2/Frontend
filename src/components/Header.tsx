@@ -1,5 +1,5 @@
 import { ArrowLeftCircle, BookMarked, Play } from "lucide-react";
-import React from "react";
+import React, { useState } from "react";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import { useQueryClient } from "@tanstack/react-query";
@@ -46,6 +46,8 @@ const Header = ({
     const navigate = useNavigate();
     const queryClient = useQueryClient();
 
+    const [programName, setProgramName] = useState(progName || "Untitled");
+
     const { mutate, isPending } = useMutation({
         mutationKey: ["save-code"],
         mutationFn: async () => {
@@ -54,7 +56,8 @@ const Header = ({
                     progId,
                     source_code,
                     LANGUAGES.find((lang) => lang.value === language)
-                        ?.code as number
+                        ?.code as number,
+                    programName
                 );
 
                 toast({
@@ -65,7 +68,8 @@ const Header = ({
                     user?.userId as string,
                     source_code,
                     LANGUAGES.find((lang) => lang.value === language)
-                        ?.code as number
+                        ?.code as number,
+                    programName
                 );
 
                 toast({
@@ -154,7 +158,8 @@ const Header = ({
                 <Input
                     className="w-[200px] rounded-lg border-primary"
                     placeholder="name your program..."
-                    defaultValue={progName ? progName : "Untitled"}
+                    value={programName}
+                    onChange={(e) => setProgramName(e.target.value)}
                 />
             </div>
 
