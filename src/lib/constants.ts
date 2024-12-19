@@ -16,4 +16,4 @@ export const LANGUAGES = [
     },
 ];
 
-export const SERVER_API_ENDPOINT = "http://localhost:8080/api";
+export const SERVER_API_ENDPOINT = "https://compilerbackend.onrender.com/api";
