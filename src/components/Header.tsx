@@ -98,7 +98,6 @@ const Header = ({
                 stdin
             );
 
-            console.log(res.data.stdout);
             setOutput(res.data.stdout);
             toast({
                 description: "Code has been run! Check the output window",
