@@ -63,7 +63,7 @@ const CodeExists = () => {
                     stdin={input}
                     setOutput={setOutput}
                     progId={programId}
-                    /* progName={data.prog.name} */
+                    progName={data.prog.name}
                 />
 
                 <div className="flex flex-col md:flex-row flex-1 gap-2">
