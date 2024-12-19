@@ -14,7 +14,7 @@ export const run = async (
             stdin,
         });
 
-        return { success: true, data: res.data.data };
+        return { success: true, data: res.data };
     } catch (error) {
         handleAxiosError(error);
 
