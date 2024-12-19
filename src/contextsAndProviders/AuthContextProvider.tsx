@@ -12,11 +12,7 @@ export const AuthContextProvider = ({
 }: {
     children: React.ReactNode;
 }) => {
-    const [user, setUser] = useState<LoginResponse | null>({
-        token: "12345",
-        userId: "fej923",
-        username: "newuser",
-    });
+    const [user, setUser] = useState<LoginResponse | null>(null);
 
     return (
         <AuthContext.Provider value={{ user, setUser }}>

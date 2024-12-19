@@ -2,6 +2,7 @@ import { ArrowLeftCircle, BookMarked, Play } from "lucide-react";
 import React from "react";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
+import { useQueryClient } from "@tanstack/react-query";
 import {
     Tooltip,
     TooltipContent,
@@ -20,7 +21,7 @@ import {
     DialogTrigger,
     DialogFooter,
 } from "@/components/ui/dialog";
-import { run, save } from "@/lib/services/code";
+import { run, save, update } from "@/lib/services/code";
 import { useMutation } from "@tanstack/react-query";
 import { useToast } from "@/hooks/use-toast";
 import { LANGUAGES } from "@/lib/constants";
@@ -28,37 +29,51 @@ import { LANGUAGES } from "@/lib/constants";
 const Header = ({
     source_code,
     language,
-    result,
     stdin,
     setOutput,
+    progId,
 }: {
     source_code: string;
     language: string;
-    result: string;
     stdin: string;
     setOutput: React.Dispatch<React.SetStateAction<string>>;
+    progId?: string;
 }) => {
     const { user } = useAuthContext();
     const { toast } = useToast();
     const navigate = useNavigate();
+    const queryClient = useQueryClient();
 
     const { mutate, isPending } = useMutation({
         mutationKey: ["save-code"],
         mutationFn: async () => {
-            const res = await save(
-                user?.userId as string,
-                source_code,
-                LANGUAGES.find((lang) => lang.value === language)
-                    ?.code as number,
-                result
-            );
+            if (progId) {
+                const res = await update(
+                    progId,
+                    source_code,
+                    LANGUAGES.find((lang) => lang.value === language)
+                        ?.code as number
+                );
 
-            toast({
-                description: "Code saved to workspace!",
-            });
+                toast({
+                    description: "Code updated successfully!",
+                });
+            } else {
+                const res = await save(
+                    user?.userId as string,
+                    source_code,
+                    LANGUAGES.find((lang) => lang.value === language)
+                        ?.code as number
+                );
+
+                toast({
+                    description: "Code saved to workspace!",
+                });
+            }
+
         },
         onSuccess: () => {
-            // refetch the programs in workspace
+            queryClient.invalidateQueries({ queryKey: ["workspace"] });
         },
         onError: () => {
             toast({
@@ -126,6 +141,7 @@ const Header = ({
             <Input
                 className="w-[400px] rounded-lg"
                 placeholder="name your program..."
+                defaultValue="Untitled"
             />
 
             <div className="flex flex-row gap-2">

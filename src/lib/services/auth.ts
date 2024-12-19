@@ -29,6 +29,8 @@ export const login = async (username: string, password: string) => {
     try {
         const response = await api.post("/auth/login", { username, password });
 
+        api.defaults.headers.Authorization = `Bearer ${response.data.token as string}`;
+        
         return {
             success: true,
             message: null,
@@ -56,11 +58,14 @@ export const login = async (username: string, password: string) => {
                 data: null,
             };
         }
-
+        
         handleAxiosError(error);
-
+        
         throw new Error();
     }
 };
 
-// logout functionality
+export const logout = async () => {
+    api.defaults.headers.Authorization = "";
+    return null;
+}

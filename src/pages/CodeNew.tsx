@@ -22,7 +22,6 @@ function CodeNew() {
             <Header
                 source_code={program}
                 language={language}
-                result={output}
                 stdin={input}
                 setOutput={setOutput}
             />

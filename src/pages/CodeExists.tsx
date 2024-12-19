@@ -1,13 +1,14 @@
 import CodeInput from "@/components/CodeInput";
 import Header from "@/components/Header";
 import LanguageDropdown from "@/components/LanguageDropdown";
-import React, { useState } from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Eraser } from "lucide-react";
 import { useParams } from "react-router";
 import { useQuery } from "@tanstack/react-query";
 import { getSpeceficProgram } from "@/lib/services/code";
 import ChatWindow from "@/components/ChatWindow";
+import { LANGUAGES } from "@/lib/constants";
 
 const CodeExists = () => {
     const params = useParams();
@@ -33,9 +34,13 @@ const CodeExists = () => {
         queryKey: [`program-${programId}`],
         queryFn: async () => {
             const result = await getSpeceficProgram(programId);
-            // setProgram()
-            // setOutput()
-            // setLanguage()
+            setProgram(result.prog.source_code);
+            setLanguage(
+                //@ts-expect-error
+                LANGUAGES.find((lang) => lang.code === result.prog.language_id)
+                    ?.value
+            );
+            return result;
         },
     });
 
@@ -55,9 +60,9 @@ const CodeExists = () => {
                 <Header
                     source_code={program}
                     language={language}
-                    result={output}
                     stdin={input}
                     setOutput={setOutput}
+                    progId={programId}
                 />
 
                 <div className="flex flex-col md:flex-row flex-1 gap-2">

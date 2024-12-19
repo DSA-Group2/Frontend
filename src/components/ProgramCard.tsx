@@ -37,19 +37,43 @@ import {
     DialogClose,
 } from "@/components/ui/dialog";
 import { Input } from "./ui/input";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useToast } from "@/hooks/use-toast";
+import { deleteProgram } from "@/lib/services/code";
+import { ProgramType } from "@/lib/types";
+import { formatDate } from "@/lib/utils";
+import { LANGUAGES } from "@/lib/constants";
 
-const ProgramCard = () => {
+const ProgramCard = ({ program }: { program: ProgramType }) => {
+    const { toast } = useToast();
+    const queryClient = useQueryClient();
+
+    const { mutate, isPending } = useMutation({
+        mutationKey: [`delete-${program._id}`],
+        mutationFn: async () => {
+            await deleteProgram(program._id);
+        },
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ["workspace"] });
+        },
+        onError: () => {
+            toast({
+                variant: "destructive",
+                title: "Some error occured. Try again soon",
+            });
+        },
+    });
     return (
         <Card className="border-none shadow-sm shadow-primary hover:shadow-md hover:shadow-primary hover:scale-[1.01] hover:cursor-pointer transition-all">
             <CardHeader>
                 <CardTitle className="flex flex-row justify-between items-center">
-                    Program Name
+                    Untitled
                     <Popover>
                         <PopoverTrigger className="p-[2px] rounded-full hover:bg-gray-800 transition-all">
                             <EllipsisVertical />
                         </PopoverTrigger>
                         <PopoverContent className="dark text-white p-2 flex flex-col gap-2 w-[120px]">
-                            <Dialog>
+                            {/* <Dialog>
                                 <DialogTrigger>
                                     <Button
                                         variant="secondary"
@@ -91,7 +115,7 @@ const ProgramCard = () => {
                                         </DialogClose>
                                     </DialogFooter>
                                 </DialogContent>
-                            </Dialog>
+                            </Dialog> */}
                             <AlertDialog>
                                 <AlertDialogTrigger>
                                     <Button className="w-full">
@@ -101,8 +125,8 @@ const ProgramCard = () => {
                                 <AlertDialogContent className="dark text-white">
                                     <AlertDialogHeader>
                                         <AlertDialogTitle>
-                                            Are you sure you want to delete
-                                            Program Name?
+                                            Are you sure you want to delete this
+                                            program?
                                         </AlertDialogTitle>
                                         <AlertDialogDescription>
                                             This action cannot be undone. This
@@ -112,10 +136,13 @@ const ProgramCard = () => {
                                         </AlertDialogDescription>
                                     </AlertDialogHeader>
                                     <AlertDialogFooter>
-                                        <AlertDialogCancel>
+                                        <AlertDialogCancel disabled={isPending}>
                                             Cancel
                                         </AlertDialogCancel>
-                                        <AlertDialogAction>
+                                        <AlertDialogAction
+                                            disabled={isPending}
+                                            onClick={() => mutate()}
+                                        >
                                             Delete
                                         </AlertDialogAction>
                                     </AlertDialogFooter>
@@ -124,11 +151,18 @@ const ProgramCard = () => {
                         </PopoverContent>
                     </Popover>
                 </CardTitle>
-                <CardDescription>Written: 10th December 2024</CardDescription>
+                <CardDescription>
+                    Written: {formatDate(program.createdAt)}
+                </CardDescription>
             </CardHeader>
-            <CardContent className="h-[100px]">Program Language</CardContent>
+            <CardContent className="h-[100px]">
+                {
+                    LANGUAGES.find((lang) => lang.code === program.language_id)
+                        ?.name
+                }
+            </CardContent>
             <CardFooter>
-                <NavLink to="/code/exists/idofprogram">
+                <NavLink to={`/valid/code/${program._id}`}>
                     <Button className="group w-full text-center">
                         Edit{" "}
                         <ArrowRight className="group-hover:translate-x-1 transition-all" />

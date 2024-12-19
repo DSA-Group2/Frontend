@@ -1,4 +1,5 @@
 import api from "../axiosInstance";
+import { ProgramType } from "../types";
 import { handleAxiosError } from "../utils";
 
 export const run = async (
@@ -7,7 +8,7 @@ export const run = async (
     stdin: string
 ) => {
     try {
-        const res = await api.post("/code/run", {
+        const res = await api.post("/code/execute", {
             source_code,
             language_id,
             stdin,
@@ -24,15 +25,32 @@ export const run = async (
 export const save = async (
     userId: string,
     source_code: string,
-    language_id: number,
-    result: string
+    language_id: number
 ) => {
     try {
         const res = await api.post("/code/save", {
             userId,
             source_code,
             language_id,
-            result,
+        });
+
+        return { success: true };
+    } catch (error) {
+        handleAxiosError(error);
+
+        throw new Error();
+    }
+};
+
+export const update = async (
+    progId: string,
+    source_code: string,
+    language_id: number
+) => {
+    try {
+        const res = await api.put(`/code/save/${progId}`, {
+            source_code,
+            language_id,
         });
 
         return { success: true };
@@ -47,7 +65,19 @@ export const getAllPrograms = async (userId: string) => {
     try {
         const res = await api.get(`/code/history/${userId}`);
 
-        return { success: true, progs: res.data };
+        return { success: true, progs: res.data as ProgramType[] };
+    } catch (error) {
+        handleAxiosError(error);
+
+        throw new Error();
+    }
+};
+
+export const deleteProgram = async (codeId: string) => {
+    try {
+        const res = await api.delete(`/code/delete/${codeId}`);
+
+        return { success: true };
     } catch (error) {
         handleAxiosError(error);
 
@@ -57,9 +87,9 @@ export const getAllPrograms = async (userId: string) => {
 
 export const getSpeceficProgram = async (programId: string) => {
     try {
-        const res = await api.get(`/code/specefic/${programId}`);
+        const res = await api.get(`/code/program/${programId}`);
 
-        return { success: true, prog: res.data };
+        return { success: true, prog: res.data as ProgramType };
     } catch (error) {
         handleAxiosError(error);
 
@@ -69,9 +99,9 @@ export const getSpeceficProgram = async (programId: string) => {
 
 export const askAIAQuestion = async (code: string, query: string) => {
     try {
-        /* const res = await api.post(`/inline`, { query, code }); */
+        const res = await api.post(`/inline`, { query, code });
 
-        return { success: true, code: 'RANDOM RESPONSE' };
+        return { success: true, code: res.data.editedCode };
     } catch (error) {
         handleAxiosError(error);
 

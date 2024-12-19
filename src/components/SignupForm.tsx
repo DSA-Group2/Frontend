@@ -7,11 +7,12 @@ import { useAuthContext } from "@/contextsAndProviders/AuthContextProvider";
 import { login, signup } from "@/lib/services/auth";
 import { useToast } from "@/hooks/use-toast";
 import { useMutation } from "@tanstack/react-query";
-import { redirect } from "react-router";
+import { useNavigate } from "react-router";
 
 const SignupForm = () => {
     const { setUser } = useAuthContext();
     const { toast } = useToast();
+    const navigate = useNavigate();
 
     const [username, setUsername] = useState<string>("");
     const [password, setPassword] = useState<string>("");
@@ -34,10 +35,10 @@ const SignupForm = () => {
                 const res2 = await login(username, password);
 
                 setUser(res2.data);
-                redirect("/workspace");
                 toast({
                     description: "Signup successful!",
                 });
+                navigate("/valid/workspace");
             }
         },
         onError: () => {
@@ -50,7 +51,7 @@ const SignupForm = () => {
 
     const onFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        
+
         mutate();
     };
 

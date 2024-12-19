@@ -1,6 +1,7 @@
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 import axios from "axios";
+import { format } from "date-fns";
 
 import { StreamLanguage } from "@codemirror/language";
 import { javascript } from "@codemirror/lang-javascript";
@@ -48,4 +49,8 @@ export const handleAxiosError = (error: unknown) => {
     }
 
     throw new Error();
+};
+
+export const formatDate = (isoDate: string) => {
+    return format(new Date(isoDate), "MMMM do yyyy");
 };

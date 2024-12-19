@@ -82,7 +82,6 @@ const ChatWindow = () => {
                                         name="code"
                                         id="code"
                                         placeholder="Your code goes here..."
-                                        required
                                         minLength={1}
                                         value={code}
                                         onChange={(e) =>

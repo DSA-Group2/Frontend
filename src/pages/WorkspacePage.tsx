@@ -17,8 +17,6 @@ const WorkspacePage = () => {
             (await getAllPrograms(user?.userId as string)).progs,
     });
 
-    console.log(data);
-
     return (
         <section
             id="workspace"
@@ -27,12 +25,12 @@ const WorkspacePage = () => {
             <WorkspaceHeader />
 
             <h1 className="text-4xl font-extrabold">
-                Welcome to your workspace 'username'!
+                Welcome to your workspace {user?.username}!
             </h1>
 
             <div className="flex flex-row justify-between items-center">
                 <h4 className="font-extrabold text-2xl">Your Programs:</h4>
-                <NavLink to="/code/new">
+                <NavLink to="/new">
                     <Button className="group">
                         Add a new program
                         <PlusCircle
@@ -55,12 +53,10 @@ const WorkspacePage = () => {
                     </p>
                 )}
 
-                <ProgramCard />
-                <ProgramCard />
-                <ProgramCard />
-                <ProgramCard />
-                <ProgramCard />
-                <ProgramCard />
+                {data &&
+                    data.map((prog) => (
+                        <ProgramCard key={prog._id} program={prog} />
+                    ))}
             </div>
         </section>
     );
